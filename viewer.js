@@ -66,7 +66,7 @@ fileInput.addEventListener("change", async (event) => {
   try {
     const model = await fragmentIfcLoader.load(buffer);
     model.name = file.name;
-    world.scene.three.add(model);
+    world.scene.three.add(model);//.....
     console.log("✅ IFC model loaded:", model);
   } catch (error) {
     console.error("❌ Failed to load IFC model:", error);
