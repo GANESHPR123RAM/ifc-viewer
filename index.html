@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IFC Viewer</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+    #container {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+    }
+    #ifcInput {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+      background: white;
+      padding: 6px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- File upload input -->
+  <input type="file" id="ifcInput" accept=".ifc" />
+
+  <!-- 3D viewer container -->
+  <div id="container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>
