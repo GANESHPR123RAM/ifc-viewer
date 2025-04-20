@@ -55,6 +55,7 @@ fragmentIfcLoader.settings.webIfc.COORDINATE_TO_ORIGIN = true;
 
 // 4. Handle file uploads
 const fileInput = document.getElementById("ifcInput");
+let currentModel = null; // Store reference to the current model
 
 fileInput.addEventListener("change", async (event) => {
   const file = event.target.files[0];
@@ -64,11 +65,19 @@ fileInput.addEventListener("change", async (event) => {
   const buffer = new Uint8Array(arrayBuffer);
 
   try {
-    const model = await fragmentIfcLoader.load(buffer);
-    model.name = file.name;
-    world.scene.three.add(model);//.....
-    console.log("✅ IFC model loaded:", model);
+    // ✅ Remove the previous model if it exists
+    if (currentModel) {
+      world.scene.three.remove(currentModel);
+      fragments.dispose(currentModel); // Optional: Clean up memory
+    }
+
+    // ✅ Load and store the new model
+    currentModel = await fragmentIfcLoader.load(buffer);
+    currentModel.name = file.name;
+    world.scene.three.add(currentModel);
+    console.log("✅ IFC model loaded:", currentModel);
   } catch (error) {
     console.error("❌ Failed to load IFC model:", error);
   }
 });
+
