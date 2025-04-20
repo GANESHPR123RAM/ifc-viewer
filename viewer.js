@@ -55,6 +55,46 @@ fragmentIfcLoader.settings.webIfc.COORDINATE_TO_ORIGIN = true;
 
 // 4. Handle file uploads
 const fileInput = document.getElementById("ifcInput");
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key.toLowerCase();
+  const isShift = event.shiftKey;
+
+  switch (key) {
+    case "x":
+      if (isShift) {
+        // View from -X axis
+        world.camera.controls.setLookAt(-10, 0, 0, 0, 0, 0);
+      } else {
+        // View from +X axis
+        world.camera.controls.setLookAt(10, 0, 0, 0, 0, 0);
+      }
+      break;
+
+    case "y":
+      if (isShift) {
+        // View from -Y axis (bottom)
+        world.camera.controls.setLookAt(0, -10, 0, 0, 0, 0);
+      } else {
+        // View from +Y axis (top)
+        world.camera.controls.setLookAt(0, 10, 0, 0, 0, 0);
+      }
+      break;
+
+    case "z":
+      if (isShift) {
+        // View from -Z axis (back)
+        world.camera.controls.setLookAt(0, 0, -10, 0, 0, 0);
+      } else {
+        // View from +Z axis (front)
+        world.camera.controls.setLookAt(0, 0, 10, 0, 0, 0);
+      }
+      break;
+  }
+});
+
+
+
 let currentModel = null; // Store reference to the current model
 
 fileInput.addEventListener("change", async (event) => {
